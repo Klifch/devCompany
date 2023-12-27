@@ -21,9 +21,11 @@ public class Project {
         this.developers = new ArrayList<>();
     }
 
+    // it's not bidirectional for now
     public void addDeveloper(Developer developer) {
         if (!developers.contains(developer)) {
             developers.add(developer);
+            developer.assignToProject(this);
         }
     }
 
@@ -31,7 +33,11 @@ public class Project {
         return projectName;
     }
 
-    public String getDevelopers() {
+    public List<Developer> getDevelopers() {
+        return developers;
+    }
+
+    public String getDevelopersAsString() {
         StringBuilder developersString = new StringBuilder();
         for (Developer developer : developers) {
             developersString.append(developer.getName()).append(" ");
@@ -39,10 +45,21 @@ public class Project {
         return developersString.toString();
     }
 
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectOffice(Office projectOffice) {
+        if (!projectOffice.equals(this.projectOffice)) {
+            this.projectOffice = projectOffice;
+            projectOffice.addProjectToOffice(this);
+        }
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "Project %s with budget %s and id %d\nHead - %s located at %s,%s",
+                "Project %s with budget %s and id %d\nHead - %s, located at %s,%s",
                 projectName,
                 projectBudget,
                 projectId,

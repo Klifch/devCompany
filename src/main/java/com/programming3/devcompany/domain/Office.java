@@ -1,5 +1,6 @@
 package com.programming3.devcompany.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Office {
@@ -11,9 +12,16 @@ public class Office {
     // Connections
     private List<Project> projects;
 
+    public Office(String name, String location, Integer officeId) {
+        this.name = name;
+        this.location = location;
+        this.officeId = officeId;
+        this.projects = new ArrayList<>();
+    }
+
     private String getProjectNames() {
         StringBuilder projectString = new StringBuilder();
-        projects.forEach(project -> projectString.append(project.getProjectName()));
+        projects.forEach(project -> projectString.append(project.getProjectName()).append(" "));
         return projectString.toString();
     }
 
@@ -23,6 +31,13 @@ public class Office {
 
     public String getName() {
         return name;
+    }
+
+    public void addProjectToOffice(Project project) {
+        if (!projects.contains(project)) {
+            projects.add(project);
+            project.setProjectOffice(this);
+        }
     }
 
     @Override
