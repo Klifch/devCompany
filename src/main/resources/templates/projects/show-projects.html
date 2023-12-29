@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects List</title>
+</head>
+<body>
+
+<div th:insert="~{fragments/nav-bar :: navigation}"></div>
+
+<h3>Projects List</h3>
+<hr>
+
+<!-- Add table to show projects -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>Project Name</th>
+        <th>Project Budget</th>
+        <th>Project Id</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempProject : ${projects}">
+        <td th:text="${tempProject.projectName}" />
+        <td th:text="${tempProject.projectBudget} + ' eur'" />
+        <td th:text="${tempProject.projectId}" />
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

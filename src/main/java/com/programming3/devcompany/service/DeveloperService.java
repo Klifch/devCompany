@@ -10,7 +10,13 @@ public interface DeveloperService {
 
     void createDeveloper(Developer developer);
 
-    void createDeveloper(String name, Integer age, Double salary, String localDate, Position position);
+    void createDeveloper(String firstName,
+                         String lastName,
+                         Integer age,
+                         Double salary,
+                         String localDate,
+                         Position position
+    );
 
     Developer getOneById(Integer id);
 

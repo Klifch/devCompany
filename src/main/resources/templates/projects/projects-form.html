@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Project</title>
+</head>
+<body>
+
+<div th:insert="~{fragments/nav-bar :: navigation}"></div>
+
+<div>
+  <h3>Projects management</h3>
+  <hr>
+
+  <h4>Add new Project</h4>
+
+  <form action="#" th:action="@{/projects/save}"
+        th:object="${project}" method="POST">
+
+    <input type="text" th:field="*{projectName}" placeholder="Project Name" required>
+
+    <br><br>
+
+    <input type="text" th:field="*{projectBudget}" placeholder="Project Budget" required>
+
+    <br><br>
+
+    <button type="submit">Save</button>
+
+  </form>
+
+</div>
+
+</body>
+</html>

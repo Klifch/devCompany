@@ -1,5 +1,8 @@
 package com.programming3.devcompany.domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -9,22 +12,29 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Developer {
 
+    private Logger logger = LoggerFactory.getLogger(Developer.class);
     private static final AtomicInteger uniq_counter = new AtomicInteger();
 
     // Basic
-    private String name;
+    private String firstName;
+    private String lastName;
     private Integer age;
     private Double salary;
     private LocalDate endOfContract;
-    private final int id;
+    private final Integer id;
 
 
     // Connections
     private List<Project> projects;
     private Position position;
 
-    public Developer(String name, Integer age, Double salary, String localDate, Position position) {
-        this.name = name;
+    public Developer() {
+        id = uniq_counter.incrementAndGet();
+    }
+
+    public Developer(String firstName, String lastName, Integer age, Double salary, String localDate, Position position) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.salary = salary;
         this.position = position;
@@ -51,12 +61,56 @@ public class Developer {
         return projects;
     }
 
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     public Double getSalary() {
         return salary;
     }
 
-    public String getName() {
-        return name;
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public LocalDate getEndOfContract() {
+        return endOfContract;
+    }
+
+    public void setEndOfContract(String endOfContract) {
+        checkDate(endOfContract);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public Integer getId() {
@@ -64,17 +118,21 @@ public class Developer {
     }
 
     private void checkDate(String localDate) {
+        logger.info("Starting {} to LocalDate conversion ...", localDate);
         try {
             LocalDate date = LocalDate.parse(localDate);
+            logger.info("Conversion to LocalDate successful ...");
 
             if (date.isAfter(LocalDate.now())) {
                 this.endOfContract = date;
             } else {
                 // logg error
+                logger.warn("Invalid date received as an input!");
             }
 
         } catch (DateTimeParseException e) {
             // logg error
+            logger.error("Couldn't parse String to LocalDate", e);
         }
     }
 
@@ -82,8 +140,9 @@ public class Developer {
     @Override
     public String toString() {
         return String.format(
-                "Developer %s, %s, %d, developer id - %d, projects - %s, salary - %f, contract till - %s",
-                name,
+                "Developer %s %s, %s, %d, developer id - %d, projects - %s, salary - %f, contract till - %s",
+                firstName,
+                lastName,
                 position,
                 age,
                 id,

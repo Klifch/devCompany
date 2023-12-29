@@ -9,7 +9,7 @@ public interface ProjectService {
 
     void createProject(Project project);
 
-    void createProject(String projectName, Integer projectBudget, Integer projectId);
+    void createProject(String projectName, Integer projectBudget);
 
     List<Project> getAllProjects();
 

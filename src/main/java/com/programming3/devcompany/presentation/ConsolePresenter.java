@@ -94,7 +94,7 @@ public class ConsolePresenter {
 
         Developer developer = developerService.getOneById(id);
         if (developer != null) {
-            System.out.printf("Developer %s with id %d is a part of projects: \n",developer.getName(), id);
+            System.out.printf("Developer %s with id %d is a part of projects: \n",developer.getFirstName(), id);
             projectService.getProjectsForDeveloper(developer).forEach(System.out::println);
         } else {
             System.out.println("Developer with such id doesn't exist!");
@@ -110,7 +110,7 @@ public class ConsolePresenter {
         if (project != null) {
             developerService.getAllForProject(project)
                     .forEach(developer -> System.out.printf("Developer %s with id %d\n",
-                            developer.getName(),
+                            developer.getFirstName(),
                             developer.getId()
                     ));
         } else {
@@ -129,14 +129,14 @@ public class ConsolePresenter {
             if (sign == 1) {
                 developerService.findAllWithSalary(salary, 1)
                         .forEach(developer -> System.out.printf("* Developer %s with id %d and salary %f\n",
-                                developer.getName(),
+                                developer.getFirstName(),
                                 developer.getId(),
                                 developer.getSalary()
                         ));
             } else {
                 developerService.findAllWithSalary(salary, 2)
                         .forEach(developer -> System.out.printf("* Developer %s with id %d and salary %f\n",
-                                developer.getName(),
+                                developer.getFirstName(),
                                 developer.getId(),
                                 developer.getSalary()
                         ));

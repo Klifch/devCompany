@@ -4,6 +4,8 @@ import com.programming3.devcompany.domain.Developer;
 import com.programming3.devcompany.domain.Office;
 import com.programming3.devcompany.domain.Position;
 import com.programming3.devcompany.domain.Project;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -16,6 +18,7 @@ import java.util.List;
 @Order(1)
 public class DataFactory implements CommandLineRunner {
 
+    private Logger logger = LoggerFactory.getLogger(DataFactory.class);
     private final DeveloperRepository developerRepository;
     private final ProjectRepository projectRepository;
     private final OfficeRepository officeRepository;
@@ -32,25 +35,26 @@ public class DataFactory implements CommandLineRunner {
     }
 
     public void seed() {
+        logger.info("Seeding the DB with values ...");
 
         List<Developer> listOfDevelopers = new ArrayList<>();
         List<Project> listOfProjects = new ArrayList<>();
         List<Office> officeList = new ArrayList<>();
 
-        Project springNew = new Project("Spring2", 100500, 9101);
-        Project javaNew = new Project("java40", 13330, 9091);
-        Project pythonNew = new Project("python4", 10, 10982);
-        Project javaCrabbed = new Project("javaCrab", 100000, 23421);
+        Project springNew = new Project("Spring2", 100500);
+        Project javaNew = new Project("java40", 13330);
+        Project pythonNew = new Project("python4", 1000);
+        Project javaCrabbed = new Project("javaCrab", 100000);
 
         listOfProjects.add(springNew);
         listOfProjects.add(javaCrabbed);
         listOfProjects.add(javaNew);
         listOfProjects.add(pythonNew);
 
-        Developer ben = new Developer("Ben", 20, 2500d, "2030-03-02", Position.SENIOR);
-        Developer oleksii = new Developer("oleksii", 22, 5500d, "2027-10-09", Position.JUNIOR);
-        Developer anna = new Developer("Anna", 22, 2700d, "2023-10-12", Position.LEAD);
-        Developer leo = new Developer("Leo", 19, 2500d, "2024-07-10", Position.JUNIOR);
+        Developer ben = new Developer("Ben", "Brown", 20, 2500d, "2030-03-02", Position.SENIOR);
+        Developer oleksii = new Developer("Oleksii", "Demydenko", 22, 5500d, "2027-10-09", Position.JUNIOR);
+        Developer anna = new Developer("Anna", "Smith", 22, 2700d, "2023-10-12", Position.LEAD);
+        Developer leo = new Developer("Leo", "Potters", 19, 2500d, "2024-07-10", Position.JUNIOR);
 
         listOfDevelopers.add(oleksii);
         listOfDevelopers.add(ben);
@@ -87,6 +91,8 @@ public class DataFactory implements CommandLineRunner {
         listOfProjects.forEach(project -> projectRepository.addProject(project));
         listOfDevelopers.forEach(developer -> developerRepository.addDeveloper(developer));
         officeList.forEach(office -> officeRepository.addOffice(office));
+
+        logger.info("Seeding completed!");
 
     }
 
