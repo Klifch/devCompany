@@ -2,27 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}" />
+
     <title>Developers List</title>
 </head>
 <body>
 
 <div th:insert="~{fragments/nav-bar :: navigation}"></div>
 
-<h3>Developers List</h3>
+<div class="container-fluid">
+<h3 th:text="#{show-developers-list}" />
 <hr>
 
-
 <!-- Add table to show developers -->
-<table border="1">
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
     <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Salary</th>
-        <th>End of Contract</th>
-        <th>Position</th>
-        <th>Id</th>
+        <th th:text="#{show-developers-table-firstName}" />
+        <th th:text="#{show-developers-table-lastName}" />
+        <th th:text="#{show-developers-table-age}" />
+        <th th:text="#{show-developers-table-salary}" />
+        <th th:text="#{show-developers-table-endOfContract}" />
+        <th th:text="#{show-developers-table-position}" />
+        <th th:text="#{show-developers-table-id}" />
+        <th th:text="#{show-developers-table-action}" />
     </tr>
     </thead>
 
@@ -31,13 +36,24 @@
         <td th:text="${tempDeveloper.firstName}" />
         <td th:text="${tempDeveloper.lastName}" />
         <td th:text="${tempDeveloper.age}" />
-        <td th:text="${tempDeveloper.salary} + ' eur'" />
+        <td th:text="${tempDeveloper.salary} + ' $'" />
         <td th:text="${tempDeveloper.endOfContract}" />
         <td th:text="${tempDeveloper.position}" />
         <td th:text="${tempDeveloper.id}" />
+
+        <td>
+            <a th:href="@{/developers/showDetails(developerId=${tempDeveloper.id})}"
+               class="btn btn-dark btn-sm" th:text="#{show-developers-table-button-details}" />
+        </td>
+
     </tr>
     </tbody>
 </table>
 
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

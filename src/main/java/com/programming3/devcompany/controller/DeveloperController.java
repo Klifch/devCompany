@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,6 +46,24 @@ public class DeveloperController {
         logger.info("Presenting view 'developers/show-developers.html'");
         return "developers/show-developers";
     }
+
+    @GetMapping("/showDetails")
+    public String showDetailsFor(@RequestParam("developerId") Integer id, Model model) {
+        logger.info("Received request /developers/showDetails/{}", id);
+
+        // Retrieve the developer by id from the service
+        logger.info("Calling developer Service to get developer details for ID {}", id);
+        Developer developer = developerService.getOneById(id);
+
+        // Add the developer to the model
+        logger.info("Adding developer details to the model");
+        model.addAttribute("developer", developer);
+
+        // Return the details view
+        logger.info("Presenting view 'developers/developer-details.html'");
+        return "developers/developer-details";
+    }
+
 
     // show form for adding new developer
     @GetMapping("/showFormForAdd")

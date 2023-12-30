@@ -1,14 +1,53 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<!--<div th:fragment="navigation">-->
+
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a th:href="@{/developers/show}">Developers</a></li>-->
+<!--        <li><a th:href="@{/projects/show}">Projects</a></li>-->
+<!--        <li><a th:href="@{/developers/showFormForAdd}">Add Developer</a></li>-->
+<!--        <li><a th:href="@{/projects/showFormForAdd}">Add Project</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<!--</div>-->
 <div th:fragment="navigation">
-
-<nav>
-    <ul>
-        <li><a th:href="@{/developers/show}">Developers</a></li>
-        <li><a th:href="@{/projects/show}">Projects</a></li>
-        <li><a th:href="@{/developers/showFormForAdd}">Add Developer</a></li>
-        <li><a th:href="@{/projects/showFormForAdd}">Add Project</a></li>
-    </ul>
-</nav>
-
+<!--<nav class="navbar navbar-expand-lg bg-body-tertiary">  border-bottom border-body -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Academic Victims & Co.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/developers/show}" th:text="#{nav-developers}" />
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/projects/show}" th:text="#{nav-projects}" />
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:text="#{nav-manage}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:text="#{nav-manage-developers}" th:href="@{/developers/showFormForAdd}" /></li>
+                            <li><a class="dropdown-item" th:text="#{nav-manage-projects}" th:href="@{/projects/showFormForAdd}" /></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:text="#{current-lang}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" th:text="#{switch-it}" th:href="@{'' + '/?localeData=it'}" /></li>
+                            <li><a class="dropdown-item" th:text="#{switch-en}" th:href="@{'' + '/?localeData=en'}" /></li>
+                        </ul>
+<!--                        <div class="dropdown-menu dropdown-menu-end">-->
+<!--                            <a class="dropdown-item" th:text="#{switch-it}" th:href="@{'' + '/?localeData=it'}" />-->
+<!--                            <a class="dropdown-item" th:text="#{switch-en}" th:href="@{'' + '/?localeData=en'}" />-->
+<!--                        </div>-->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </div>

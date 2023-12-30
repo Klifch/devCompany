@@ -2,56 +2,66 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}" />
     <title>Add Developer</title>
 </head>
 <body>
 
 <div th:insert="~{fragments/nav-bar :: navigation}"></div>
 
-<div>
-
-    <h3>Developers management</h3>
+<div class="container-fluid">
+    <h3 th:text="#{add-developer-title-manage}" />
     <hr>
 
-    <h4>Add new Developer</h4>
+    <p class="h4 mb-4" th:text="#{add-developer-title-add}"/>
 
     <form action="#" th:action="@{/developers/save}"
                      th:object="${developer}" method="POST">
 
-        <input type="text" th:field="*{firstName}" placeholder="First Name" required>
+        <div class="input-group mb-3 w-25">
+            <span class="input-group-text" th:text="#{add-developer-form-firstName}" />
+        <input type="text" th:field="*{firstName}" class="form-control" placeholder="Phil">
+        </div>
 
-        <br><br>
+        <div class="input-group mb-3 w-25">
+            <span class="input-group-text" th:text="#{add-developer-form-lastName}" />
+        <input type="text" th:field="*{lastName}" class="form-control" placeholder="Mahar">
+        </div>
 
-        <input type="text" th:field="*{lastName}" placeholder="Last Name" required>
+        <div class="input-group mb-3 w-25">
+            <span class="input-group-text" th:text="#{add-developer-form-age}" />
+        <input type="text" th:field="*{age}" class="form-control" placeholder="81">
+        </div>
 
-        <br><br>
+        <div class="input-group mb-3 w-25">
+            <span class="input-group-text" th:text="#{add-developer-form-salary}" />
+        <input type="text" th:field="*{salary}" class="form-control" placeholder="1234">
+        </div>
 
-        <input type="text" th:field="*{age}" placeholder="Age" required>
+        <div class="input-group mb-3 w-25">
+            <span class="input-group-text" th:text="#{add-developer-form-contractExpiration}" />
+        <input type="text" th:field="*{endOfContract}" class="form-control" placeholder="2027-10-09">
+        </div>
 
-        <br><br>
+        <div class="input-group mb-3 w-25">
+            <span class="input-group-text" th:text="#{add-developer-form-position}" />
+            <select class="form-select" th:field="*{position}">
+                <option th:each="tempPosition : ${positions}"
+                        th:value="${tempPosition}"
+                        th:text="${tempPosition}" />
+            </select>
+        </div>
 
-        <input type="text" th:field="*{salary}" placeholder="Salary" required>
-
-        <br><br>
-
-        <input type="text" th:field="*{endOfContract}" placeholder="Contract till Date">
-
-        <br><br>
-
-        Choose Position:
-
-        <select th:field="*{position}">
-            <option th:each="tempPosition : ${positions}"
-                    th:value="${tempPosition}"
-                    th:text="${tempPosition}" />
-        </select>
-
-        <button type="submit">Save</button>
+        <button class="btn btn-dark col-1" type="submit" th:text="#{add-developer-form-button-save}" />
 
     </form>
 
 </div>
 
+<div th:replace="~{fragments/footer :: footer}"></div>
 
+<script th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

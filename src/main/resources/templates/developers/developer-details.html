@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}" />
+    <title>Developer info</title>
+</head>
+<body>
+
+<div th:insert="~{fragments/nav-bar :: navigation}"></div>
+
+<div class="container-fluid">
+
+    <h3 th:text="#{details-developer-title-details}" />
+    <div class="container grid gap-0 row-gap-1">
+        <p class="h4 mb-4" th:text="#{details-developer-title-info}" />
+        <div class="p-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:text="${developer.firstName}" />
+            <li class="list-group-item" th:text="${developer.lastName}" />
+            <li class="list-group-item" th:text="${developer.age} + ' y.o'" />
+            <li class="list-group-item" th:text="${developer.salary} + '$'" />
+            <li class="list-group-item" th:text="${developer.position}" />
+            <li class="list-group-item" th:text="#{details-developer-info-contractTill} + ' ' + ${developer.endOfContract}" />
+            <li class="list-group-item" th:text="'ID - ' + ${developer.id}" />
+        </ul>
+        </div>
+
+<!--        <div class="row mb-4">-->
+        <div class="p-2">
+        <p class="h4 mb-4" th:text="#{details-developer-title-projects}" />
+        <div class="list-group">
+            <a th:each="project : ${developer.projects}" th:href="@{/projects/showDetails(projectId=${project.projectId})}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1" th:text="${project.projectName}"/>
+                </div>
+                <p class="mb-1" th:text="#{details-developer-info-projects-project} + ' ' + ${project.projectName} + ' ' + #{details-developer-info-projects-withBudget} + ' ' + ${project.projectBudget} + '$'" />
+                <small class="text-body-secondary" th:text="#{details-developer-info-projects-projectId} + ' ' + ${project.projectId}" />
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
