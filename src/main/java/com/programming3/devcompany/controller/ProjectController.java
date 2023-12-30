@@ -1,5 +1,6 @@
 package com.programming3.devcompany.controller;
 
+import com.programming3.devcompany.domain.Developer;
 import com.programming3.devcompany.domain.Project;
 import com.programming3.devcompany.service.ProjectService;
 import org.slf4j.Logger;
@@ -7,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +39,23 @@ public class ProjectController {
 
         logger.info("Presenting view 'projects/show-projects.html'");
         return "projects/show-projects";
+    }
+
+    @GetMapping("/showDetails")
+    public String showDetailsFor(@RequestParam("projectId") Integer id, Model model) {
+        logger.info("Received request /projects/showDetails/{}", id);
+
+        // Retrieve the developer by id from the service
+        logger.info("Calling project Service to get project details for ID {}", id);
+        Project project = projectService.getProjectById(id);
+
+        // Add the developer to the model
+        logger.info("Adding project details to the model");
+        model.addAttribute("project", project);
+
+        // Return the details view
+        logger.info("Presenting view 'projects/project-details.html'");
+        return "projects/project-details";
     }
 
     // show form for adding new developer

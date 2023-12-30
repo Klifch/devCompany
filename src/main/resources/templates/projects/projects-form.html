@@ -2,34 +2,46 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}" />
+
   <title>Add Project</title>
 </head>
 <body>
 
 <div th:insert="~{fragments/nav-bar :: navigation}"></div>
 
-<div>
+<div class="container-fluid">
   <h3>Projects management</h3>
   <hr>
 
-  <h4>Add new Project</h4>
+<!--  <h4>Add new Project</h4>-->
+  <p class="h4 mb-4">Add new project</p>
+
 
   <form action="#" th:action="@{/projects/save}"
         th:object="${project}" method="POST">
 
-    <input type="text" th:field="*{projectName}" placeholder="Project Name" required>
+    <div class="input-group mb-3 w-25">
+      <span class="input-group-text">Project name</span>
+    <input type="text" th:field="*{projectName}" class="form-control" placeholder="Best project ever">
+    </div>
 
-    <br><br>
+    <div class="input-group mb-3 w-25">
+      <span class="input-group-text">Project budget</span>
+    <input type="text" th:field="*{projectBudget}" class="form-control" placeholder="9999">
+    </div>
 
-    <input type="text" th:field="*{projectBudget}" placeholder="Project Budget" required>
-
-    <br><br>
-
-    <button type="submit">Save</button>
+    <button class="btn btn-dark col-1" type="submit">Save</button>
 
   </form>
 
 </div>
 
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
