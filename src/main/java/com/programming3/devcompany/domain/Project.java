@@ -10,7 +10,7 @@ public class Project {
 
     // Basic
     private String projectName;
-    private Integer projectBudget;
+    private Double projectBudget;
     private final Integer projectId;
 
     // Connections
@@ -23,9 +23,10 @@ public class Project {
         projectId = uniq_counter.incrementAndGet();
     }
 
-    public Project(String projectName, Integer projectBudget) {
+    public Project(String projectName, Double projectBudget) {
         this.projectName = projectName;
         this.projectBudget = projectBudget;
+
         this.developers = new ArrayList<>();
         projectId = uniq_counter.incrementAndGet();
     }
@@ -47,11 +48,11 @@ public class Project {
         this.developers = developers;
     }
 
-    public Integer getProjectBudget() {
+    public Double getProjectBudget() {
         return projectBudget;
     }
 
-    public void setProjectBudget(Integer projectBudget) {
+    public void setProjectBudget(Double projectBudget) {
         this.projectBudget = projectBudget;
     }
 

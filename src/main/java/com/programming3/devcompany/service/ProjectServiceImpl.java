@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void createProject(String projectName, Integer projectBudget) {
+    public void createProject(String projectName, Double projectBudget) {
         logger.info("Creating new project using arguments ... ");
         logger.info("Calling Project repository from Service to add new Project");
         projectRepository.addProject(new Project(

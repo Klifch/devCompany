@@ -41,10 +41,10 @@ public class DataFactory implements CommandLineRunner {
         List<Project> listOfProjects = new ArrayList<>();
         List<Office> officeList = new ArrayList<>();
 
-        Project springNew = new Project("Spring2", 100500);
-        Project javaNew = new Project("java40", 13330);
-        Project pythonNew = new Project("python4", 1000);
-        Project javaCrabbed = new Project("javaCrab", 100000);
+        Project springNew = new Project("Spring2", 100500d);
+        Project javaNew = new Project("java40", 13330d);
+        Project pythonNew = new Project("python4", 1000d);
+        Project javaCrabbed = new Project("javaCrab", 100000d);
 
         listOfProjects.add(springNew);
         listOfProjects.add(javaCrabbed);

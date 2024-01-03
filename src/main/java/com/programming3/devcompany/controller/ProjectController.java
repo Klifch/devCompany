@@ -1,13 +1,19 @@
 package com.programming3.devcompany.controller;
 
 import com.programming3.devcompany.domain.Developer;
+import com.programming3.devcompany.domain.Position;
 import com.programming3.devcompany.domain.Project;
+import com.programming3.devcompany.presentation.viewmodel.ProjectViewModel;
 import com.programming3.devcompany.service.ProjectService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +29,17 @@ public class ProjectController {
     public ProjectController(ProjectService projectService) {
         logger.info("Creating new ProjectService from Controller");
         this.projectService = projectService;
+    }
+
+    // adding initbinder preprocessor for trimming input strings
+    // it will remove leading and trailing whitespaces
+    // called for every request
+    // DOC: https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-initbinder.html
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+
+        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
     @GetMapping("/show")
@@ -66,11 +83,11 @@ public class ProjectController {
         // Create new project
         // I can change this code for other constructor, but why?
         logger.info("Creating new project ...");
-        Project project = new Project();
+        ProjectViewModel projectViewModel = new ProjectViewModel();
 
         // add empty developer to the form
         logger.info("Adding new project to the model");
-        model.addAttribute("project", project);
+        model.addAttribute("projectViewModel", projectViewModel);
 
         // return view
         logger.info("Presenting view 'projects/projects-form.html'");
@@ -78,12 +95,26 @@ public class ProjectController {
     }
 
     @PostMapping("/save")
-    public String saveDeveloper(@ModelAttribute("project") Project project) {
-        logger.info("Received post request /projects/save with Project {}", project);
+    public String saveDeveloper(
+            @Valid @ModelAttribute("projectViewModel") ProjectViewModel projectViewModel,
+            BindingResult bindingResult
+    ) {
+        logger.info("Checking for errors ...");
+        if (bindingResult.hasErrors()) {
+            logger.warn("Error found! Routing to form ...");
+            logger.warn("Binding result: " + bindingResult.toString());
+            return "projects/projects-form";
+        }
+
+        logger.info("Received post request /projects/save with ProjectViewModel {}", projectViewModel);
 
         // save received developer
-        logger.info("Calling Project service from controller to add new project {}", project);
-        projectService.createProject(project);
+        logger.info("Calling Project service from controller to add new project {}", projectViewModel);
+        projectService.createProject(new Project(
+                projectViewModel.getProjectName(),
+                projectViewModel.getProjectBudget()
+                )
+        );
 
         // redirect to the list of all developers
         logger.info("Redirecting to /projects/show");

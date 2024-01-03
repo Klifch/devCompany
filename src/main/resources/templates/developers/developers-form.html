@@ -18,31 +18,51 @@
     <p class="h4 mb-4" th:text="#{add-developer-title-add}"/>
 
     <form action="#" th:action="@{/developers/save}"
-                     th:object="${developer}" method="POST">
+                     th:object="${developerViewModel}"
+                     method="POST"
+                     novalidate="novalidate">
 
-        <div class="input-group mb-3 w-25">
+        <div class="input-group mb-3 w-25 has-validation">
             <span class="input-group-text" th:text="#{add-developer-form-firstName}" />
-        <input type="text" th:field="*{firstName}" class="form-control" placeholder="Phil">
+        <input type="text" th:field="*{firstName}" class="form-control" th:classappend="${#fields.hasErrors('firstName')?'is-invalid':''}" placeholder="Phil">
+            <div th:if="${#fields.hasErrors('firstName')}" class="invalid-feedback">
+                <span th:errors="*{firstName}"></span>
+            </div>
         </div>
+<!--        <span th:if="${#fields.hasErrors('firstName')}"-->
+<!--              th:errors="*{firstName}"-->
+<!--              class="badge bg-danger" ></span>-->
 
-        <div class="input-group mb-3 w-25">
+        <div class="input-group mb-3 w-25 has-validation">
             <span class="input-group-text" th:text="#{add-developer-form-lastName}" />
-        <input type="text" th:field="*{lastName}" class="form-control" placeholder="Mahar">
+        <input type="text" th:field="*{lastName}" class="form-control" th:classappend="${#fields.hasErrors('lastName')?'is-invalid':''}" placeholder="Mahar">
+            <div th:if="${#fields.hasErrors('lastName')}" class="invalid-feedback">
+                <span th:errors="*{lastName}"></span>
+            </div>
         </div>
 
-        <div class="input-group mb-3 w-25">
+        <div class="input-group mb-3 w-25 has-validation">
             <span class="input-group-text" th:text="#{add-developer-form-age}" />
-        <input type="text" th:field="*{age}" class="form-control" placeholder="81">
+        <input type="text" th:field="*{age}" class="form-control" th:classappend="${#fields.hasErrors('age')?'is-invalid':''}" placeholder="81">
+            <div th:if="${#fields.hasErrors('age')}" class="invalid-feedback">
+                <span th:errors="*{age}"></span>
+            </div>
         </div>
 
-        <div class="input-group mb-3 w-25">
+        <div class="input-group mb-3 w-25 has-validation">
             <span class="input-group-text" th:text="#{add-developer-form-salary}" />
-        <input type="text" th:field="*{salary}" class="form-control" placeholder="1234">
+        <input type="text" th:field="*{salary}" class="form-control" th:classappend="${#fields.hasErrors('salary')?'is-invalid':''}" placeholder="1234">
+            <div th:if="${#fields.hasErrors('salary')}" class="invalid-feedback">
+                <span th:errors="*{salary}"></span>
+            </div>
         </div>
 
-        <div class="input-group mb-3 w-25">
+        <div class="input-group mb-3 w-25 has-validation">
             <span class="input-group-text" th:text="#{add-developer-form-contractExpiration}" />
-        <input type="text" th:field="*{endOfContract}" class="form-control" placeholder="2027-10-09">
+        <input type="text" th:field="*{endOfContract}" class="form-control" th:classappend="${#fields.hasErrors('endOfContract')?'is-invalid':''}" placeholder="2027-10-09">
+            <div th:if="${#fields.hasErrors('endOfContract')}" class="invalid-feedback">
+                <span th:errors="*{endOfContract}"></span>
+            </div>
         </div>
 
         <div class="input-group mb-3 w-25">

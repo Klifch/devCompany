@@ -43,6 +43,18 @@ public class Developer {
         id = uniq_counter.incrementAndGet();
     }
 
+    public Developer(String firstName, String lastName, Integer age, Double salary, LocalDate endOfContract, Position position) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.salary = salary;
+        this.position = position;
+        this.endOfContract = endOfContract;
+
+        this.projects = new ArrayList<>();
+        id = uniq_counter.incrementAndGet();
+    }
+
     // it's not bidirectional for now
     public void assignToProject(Project project) {
         if (!projects.contains(project)) {
@@ -117,6 +129,8 @@ public class Developer {
         return id;
     }
 
+
+    // TODO: old conversion stuff - clean later
     private void checkDate(String localDate) {
         logger.info("Starting {} to LocalDate conversion ...", localDate);
         try {
@@ -136,7 +150,7 @@ public class Developer {
         }
     }
 
-    // Finish toString for all attributes
+    // TODO: Finish toString for all attributes
     @Override
     public String toString() {
         return String.format(

@@ -9,29 +9,29 @@ public enum Position {
     ;
 
 
-//    @Override
-//    public String toString() {
-//        switch (this) {
-//            case TRAINEE -> {
-//                return  "Trainee";
-//            }
-//            case JUNIOR -> {
-//                return "Junior";
-//            }
-//            case MIDDLE -> {
-//                return "Middle";
-//            }
-//            case SENIOR -> {
-//                return "Senior";
-//            }
-//            case LEAD -> {
-//                return "Lead GOD";
-//            }
-//            default -> {
-//                return null;
-//            }
-//        }
-//    }
+    @Override
+    public String toString() {
+        switch (this) {
+            case TRAINEE -> {
+                return  "Trainee";
+            }
+            case JUNIOR -> {
+                return "Junior";
+            }
+            case MIDDLE -> {
+                return "Middle";
+            }
+            case SENIOR -> {
+                return "Senior";
+            }
+            case LEAD -> {
+                return "Lead GOD";
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
 
 
 }

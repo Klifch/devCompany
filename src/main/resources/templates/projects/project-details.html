@@ -21,8 +21,8 @@
                 <li class="list-group-item" th:text="${project.projectName}" />
                 <li class="list-group-item" th:text="${project.projectBudget} + '$'" />
                 <li class="list-group-item" th:text="'ID - ' + ${project.projectId}" />
-                <li class="list-group-item" th:text="#{details-project-info-office} + ' - ' + ${project.projectOffice.name}" />
-                <li class="list-group-item" th:text="#{details-project-info-location} + ' - ' + ${project.projectOffice.location}" />
+                <li class="list-group-item" th:text="#{details-project-info-office} + ' - ' + ${project.projectOffice?.name}" />
+                <li class="list-group-item" th:text="#{details-project-info-location} + ' - ' + ${project.projectOffice?.location}" />
             </ul>
         </div>
 

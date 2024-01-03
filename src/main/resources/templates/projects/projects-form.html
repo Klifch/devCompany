@@ -21,16 +21,24 @@
 
 
   <form action="#" th:action="@{/projects/save}"
-        th:object="${project}" method="POST">
+                   th:object="${projectViewModel}"
+                   method="POST"
+                   novalidate="novalidate">
 
-    <div class="input-group mb-3 w-25">
+    <div class="input-group mb-3 w-25 has-validation">
       <span class="input-group-text" th:text="#{add-project-form-projectName}" />
-    <input type="text" th:field="*{projectName}" class="form-control" placeholder="Best project ever">
+    <input type="text" th:field="*{projectName}" class="form-control" th:classappend="${#fields.hasErrors('projectName')?'is-invalid':''}" placeholder="Best project ever">
+      <div th:if="${#fields.hasErrors('projectName')}" class="invalid-feedback">
+        <span th:errors="*{projectName}"></span>
+      </div>
     </div>
 
-    <div class="input-group mb-3 w-25">
+    <div class="input-group mb-3 w-25 has-validation">
       <span class="input-group-text" th:text="#{add-project-form-projectBudget}" />
-    <input type="text" th:field="*{projectBudget}" class="form-control" placeholder="9999">
+    <input type="text" th:field="*{projectBudget}" class="form-control" th:classappend="${#fields.hasErrors('projectBudget')?'is-invalid':''}" placeholder="9999">
+      <div th:if="${#fields.hasErrors('projectBudget')}" class="invalid-feedback">
+        <span th:errors="*{projectBudget}"></span>
+      </div>
     </div>
 
     <button class="btn btn-dark col-1" type="submit" th:text="#{add-project-form-button-save}" />
