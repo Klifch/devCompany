@@ -55,6 +55,18 @@ public class Developer {
         id = uniq_counter.incrementAndGet();
     }
 
+    public Developer(String firstName, String lastName, Integer age, Double salary, LocalDate endOfContract, Position position, int id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.salary = salary;
+        this.position = position;
+        this.endOfContract = endOfContract;
+
+        this.projects = new ArrayList<>();
+        this.id = id;
+    }
+
     // it's not bidirectional for now
     public void assignToProject(Project project) {
         if (!projects.contains(project)) {

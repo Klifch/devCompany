@@ -48,11 +48,13 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project getProjectById(Integer id) {
         logger.info("Filtering projects to find one with ID {} ... ", id);
-        return projectRepository.getAllProjects()
-                .stream()
-                .filter(project -> project.getProjectId().equals(id))
-                .findFirst()
-                .orElse(null);
+//        return projectRepository.getAllProjects()
+//                .stream()
+//                .filter(project -> project.getProjectId().equals(id))
+//                .findFirst()
+//                .orElse(null);
+
+        return projectRepository.getOneById(id);
     }
 
     @Override

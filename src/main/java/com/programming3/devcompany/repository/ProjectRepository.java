@@ -9,4 +9,6 @@ public interface ProjectRepository {
     void addProject(Project project);
 
     List<Project> getAllProjects();
+
+    Project getOneById(Integer id);
 }

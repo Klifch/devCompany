@@ -30,4 +30,12 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         logger.info("Taking all projects from the DB ...");
         return projects;
     }
+
+    @Override
+    public Project getOneById(Integer id) {
+        return projects.stream()
+                .filter(project -> project.getProjectId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
 }

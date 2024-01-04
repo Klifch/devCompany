@@ -31,6 +31,14 @@ public class Project {
         projectId = uniq_counter.incrementAndGet();
     }
 
+    public Project(String projectName, Double projectBudget, Integer projectId) {
+        this.projectName = projectName;
+        this.projectBudget = projectBudget;
+
+        this.developers = new ArrayList<>();
+        this.projectId = projectId;
+    }
+
 
     public String getProjectName() {
         return projectName;

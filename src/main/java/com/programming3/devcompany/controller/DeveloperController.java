@@ -71,7 +71,7 @@ public class DeveloperController {
         Developer developer = developerService.getOneById(id);
 
         // Add the developer to the model
-        logger.info("Adding developer details to the model");
+        logger.info("Adding developer details to the model: {}", developer);
         model.addAttribute("developer", developer);
 
         // Return the details view
