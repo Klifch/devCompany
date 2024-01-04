@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}" />
+
+    <title>Page Visits List</title>
+</head>
+<body>
+
+<div th:insert="~{fragments/nav-bar :: navigation}"></div>
+
+<div class="container-fluid">
+    <h3 th:text="#{history-session-title-main}"/>
+    <hr>
+
+    <!-- Add table to show projects -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th th:text="#{session-history-table-page}" />
+            <th th:text="#{session-history-table-timestamp}" />
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempHistory : ${pageHistories}">
+            <td th:text="${tempHistory.page}" />
+            <td th:text="${tempHistory.timestamp}" />
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

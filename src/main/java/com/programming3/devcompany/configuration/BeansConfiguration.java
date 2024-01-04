@@ -1,5 +1,7 @@
 package com.programming3.devcompany.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -13,6 +15,8 @@ import java.util.TimeZone;
 @Configuration
 public class BeansConfiguration {
 
+    Logger logger = LoggerFactory.getLogger(BeansConfiguration.class);
+
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
@@ -21,6 +25,8 @@ public class BeansConfiguration {
 
         cookieLocaleResolver.setDefaultTimeZone(TimeZone.getTimeZone("UTC"));
 
+        logger.info(cookieLocaleResolver.toString());
+
         return cookieLocaleResolver;
     }
 
@@ -28,7 +34,9 @@ public class BeansConfiguration {
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor theLocaleChangeInterceptor = new LocaleChangeInterceptor();
 
+        logger.info("INfo about locale {}", theLocaleChangeInterceptor.getParamName());
         theLocaleChangeInterceptor.setParamName("localeData");
+        logger.info("INfo about locale {}", theLocaleChangeInterceptor.getParamName());
 
         return theLocaleChangeInterceptor;
     }

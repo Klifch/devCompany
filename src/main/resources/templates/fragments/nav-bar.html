@@ -33,14 +33,22 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" th:text="#{nav-manage-developers}" th:href="@{/developers/showFormForAdd}" /></li>
                             <li><a class="dropdown-item" th:text="#{nav-manage-projects}" th:href="@{/projects/showFormForAdd}" /></li>
+                            <li><a class="dropdown-item" th:text="#{nav-manage-sessionHistory}" th:href="@{/sessionHistory}" /></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" th:text="#{current-lang}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" th:text="#{switch-it}" th:href="@{'' + '/?localeData=it'}" /></li>
-                            <li><a class="dropdown-item" th:text="#{switch-en}" th:href="@{'' + '/?localeData=en'}" /></li>
+                            <li><a class="dropdown-item" th:text="#{switch-it}" th:href="@{'/?localeData=it'}" /></li>
+                            <li><a class="dropdown-item" th:text="#{switch-en}" th:href="@{'/?localeData=en'}" /></li>
+<!--                            <li><a class="dropdown-item" th:text="#{switch-it}" onclick="window.location.replace('/?localeData=it')" /></li>-->
+<!--                            <li><a class="dropdown-item" th:text="#{switch-en}" onclick="window.location.replace('/?localeData=en')" /></li>-->
                         </ul>
+
+<!--                        <ul class="dropdown-menu dropdown-menu-end">-->
+<!--                            <li><a class="dropdown-item" th:text="#{switch-it}" th:href="@{'/?localeData=it'}" /></li>-->
+<!--                            <li><a class="dropdown-item" th:text="#{switch-en}" th:href="@{'/?localeData=en'}" /></li>-->
+<!--                        </ul>-->
 <!--                        <div class="dropdown-menu dropdown-menu-end">-->
 <!--                            <a class="dropdown-item" th:text="#{switch-it}" th:href="@{'' + '/?localeData=it'}" />-->
 <!--                            <a class="dropdown-item" th:text="#{switch-en}" th:href="@{'' + '/?localeData=en'}" />-->

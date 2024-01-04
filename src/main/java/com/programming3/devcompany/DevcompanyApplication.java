@@ -12,24 +12,24 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.Locale;
 
 @SpringBootApplication
-public class DevcompanyApplication implements WebMvcConfigurer {
+public class DevcompanyApplication {
 
-	private final LocaleChangeInterceptor localeChangeInterceptor;
+//	private final LocaleChangeInterceptor localeChangeInterceptor;
+//
+//	public DevcompanyApplication(LocaleChangeInterceptor localeChangeInterceptor) {
+//		this.localeChangeInterceptor = localeChangeInterceptor;
+//	}
 
-	public DevcompanyApplication(LocaleChangeInterceptor localeChangeInterceptor) {
-		this.localeChangeInterceptor = localeChangeInterceptor;
-	}
-
-	@Override
-	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-		interceptorRegistry.addInterceptor(localeChangeInterceptor);
-	}
+//	@Override
+//	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+//		interceptorRegistry.addInterceptor(localeChangeInterceptor);
+//	}
 
 	public static void main(String[] args) {
 
-		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasenames("lang/messages");
-		messageSource.setDefaultEncoding("UTF-8");
+//		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//		messageSource.setBasenames("lang/messages");
+//		messageSource.setDefaultEncoding("UTF-8");
 
 		SpringApplication.run(DevcompanyApplication.class, args);
 	}
