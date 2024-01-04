@@ -47,11 +47,12 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Override
     public Developer getOneById(Integer id) {
         logger.info("Filtering developers to find one with ID {} ... ", id);
-        return developerRepository.getAllDevelopers()
-                .stream()
-                .filter(developer -> developer.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+//        return developerRepository.getAllDevelopers()
+//                .stream()
+//                .filter(developer -> developer.getId().equals(id))
+//                .findFirst()
+//                .orElse(null);
+        return developerRepository.findById(id);
     }
 
     @Override

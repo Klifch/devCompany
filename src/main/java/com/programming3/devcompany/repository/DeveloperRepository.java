@@ -10,4 +10,6 @@ public interface DeveloperRepository {
     void addDeveloper(Developer developer);
 
     List<Developer> getAllDevelopers();
+
+    Developer findById(int developerId);
 }

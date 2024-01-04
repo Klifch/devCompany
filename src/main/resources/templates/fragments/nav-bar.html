@@ -39,8 +39,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" th:text="#{current-lang}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" th:text="#{switch-it}" th:href="@{'/?localeData=it'}" /></li>
-                            <li><a class="dropdown-item" th:text="#{switch-en}" th:href="@{'/?localeData=en'}" /></li>
+                            <li><a class="dropdown-item" th:text="#{switch-it}" th:href="@{/changeLocale(localeData='it')}" /></li>
+                            <li><a class="dropdown-item" th:text="#{switch-en}" th:href="@{/changeLocale(localeData='en')}" /></li>
+<!--                            <li><a class="dropdown-item" th:text="#{switch-it}" th:href="@{'/?localeData=it'}" /></li>-->
+<!--                            <li><a class="dropdown-item" th:text="#{switch-en}" th:href="@{'/?localeData=en'}" /></li>-->
+<!--                            <a th:href="@{/developers/showDetails(developerId=${tempDeveloper.id})}"-->
+<!--                               class="btn btn-dark btn-sm" th:text="#{show-developers-table-button-details}" />-->
 <!--                            <li><a class="dropdown-item" th:text="#{switch-it}" onclick="window.location.replace('/?localeData=it')" /></li>-->
 <!--                            <li><a class="dropdown-item" th:text="#{switch-en}" onclick="window.location.replace('/?localeData=en')" /></li>-->
                         </ul>

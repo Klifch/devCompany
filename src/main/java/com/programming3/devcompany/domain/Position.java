@@ -25,7 +25,7 @@ public enum Position {
                 return "Senior";
             }
             case LEAD -> {
-                return "Lead GOD";
+                return "Lead";
             }
             default -> {
                 return null;
