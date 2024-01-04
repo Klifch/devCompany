@@ -137,4 +137,12 @@ public class DeveloperController {
         logger.info("Redirecting to /developers/show");
         return "redirect:/developers/show";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("developerId") Integer id) {
+
+        developerService.deleteById(id);
+
+        return "redirect:/developers/show";
+    }
 }

@@ -65,4 +65,9 @@ public class ProjectServiceImpl implements ProjectService {
                 .filter(project -> project.getDevelopers().contains(developer))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        projectRepository.deleteById(id);
+    }
 }

@@ -77,10 +77,11 @@ public class Project {
     }
 
     public void setProjectOffice(Office projectOffice) {
-        if (!projectOffice.equals(this.projectOffice)) {
-            this.projectOffice = projectOffice;
-            projectOffice.addProjectToOffice(this);
-        }
+        this.projectOffice = projectOffice;
+//        if (!projectOffice.equals(this.projectOffice)) {
+//            this.projectOffice = projectOffice;
+//            projectOffice.addProjectToOffice(this);
+//        }
     }
 
     public Integer getProjectId() {

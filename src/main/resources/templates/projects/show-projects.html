@@ -36,6 +36,10 @@
         <td>
             <a th:href="@{/projects/showDetails(projectId=${tempProject.projectId})}"
                class="btn btn-dark btn-sm" th:text="#{show-projects-table-button-details}" />
+            <a th:href="@{/projects/delete(projectId=${tempProject.projectId})}"
+               class="btn btn-danger btn-sm" th:text="#{show-projects-table-button-delete}"
+               onclick="if (!(confirm('Are you sure you want delete this element?'))) return false"
+            />
         </td>
     </tr>
     </tbody>

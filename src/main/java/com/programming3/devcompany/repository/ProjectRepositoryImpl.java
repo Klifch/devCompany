@@ -26,6 +26,11 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        projects.remove(getOneById(id));
+    }
+
+    @Override
     public List<Project> getAllProjects() {
         logger.info("Taking all projects from the DB ...");
         return projects;

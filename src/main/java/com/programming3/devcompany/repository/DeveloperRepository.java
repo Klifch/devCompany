@@ -9,6 +9,8 @@ public interface DeveloperRepository {
 
     void addDeveloper(Developer developer);
 
+    void deleteById(Integer id);
+
     List<Developer> getAllDevelopers();
 
     Developer findById(int developerId);

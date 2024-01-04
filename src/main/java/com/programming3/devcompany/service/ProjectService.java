@@ -16,4 +16,6 @@ public interface ProjectService {
     Project getProjectById(Integer id);
 
     List<Project> getProjectsForDeveloper(Developer developer);
+
+    void deleteById(Integer id);
 }

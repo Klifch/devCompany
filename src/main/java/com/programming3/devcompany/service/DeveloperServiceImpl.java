@@ -91,4 +91,9 @@ public class DeveloperServiceImpl implements DeveloperService {
                 .filter(developer -> developer.getProjects().contains(project))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        developerRepository.deleteById(id);
+    }
 }

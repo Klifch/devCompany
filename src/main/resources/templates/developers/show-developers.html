@@ -44,6 +44,10 @@
         <td>
             <a th:href="@{/developers/showDetails(developerId=${tempDeveloper.id})}"
                class="btn btn-dark btn-sm" th:text="#{show-developers-table-button-details}" />
+            <a th:href="@{/developers/delete(developerId=${tempDeveloper.id})}"
+               class="btn btn-danger btn-sm" th:text="#{show-developers-table-button-delete}"
+               onclick="if (!(confirm('Are you sure you want delete this element?'))) return false"
+            />
         </td>
 
     </tr>

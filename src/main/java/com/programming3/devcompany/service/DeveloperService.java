@@ -25,4 +25,6 @@ public interface DeveloperService {
     List<Developer> findAllWithSalary(Double salary, int option);
 
     List<Developer> getAllForProject(Project project);
+
+    void deleteById(Integer id);
 }

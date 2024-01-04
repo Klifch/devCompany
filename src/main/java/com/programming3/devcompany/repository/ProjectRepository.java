@@ -8,6 +8,8 @@ public interface ProjectRepository {
 
     void addProject(Project project);
 
+    void deleteById(Integer id);
+
     List<Project> getAllProjects();
 
     Project getOneById(Integer id);

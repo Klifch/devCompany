@@ -120,4 +120,12 @@ public class ProjectController {
         logger.info("Redirecting to /projects/show");
         return "redirect:/projects/show";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("projectId") Integer id) {
+
+        projectService.deleteById(id);
+
+        return "redirect:/projects/show";
+    }
 }

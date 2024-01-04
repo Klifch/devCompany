@@ -29,6 +29,11 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        developers.remove(findById(id));
+    }
+
+    @Override
     public List<Developer> getAllDevelopers() {
         logger.info("Taking all developers from the DB ...");
         return developers;

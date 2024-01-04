@@ -25,7 +25,7 @@ public class H2DatabaseConfig {
 
     @Bean
     public ProjectRepository projectRepository(JdbcTemplate jdbcTemplate) {
-        return new JdbcProjectRepository(jdbcTemplate);
+        return new JdbcProjectRepositoryImpl(jdbcTemplate);
     }
 
     @Bean
