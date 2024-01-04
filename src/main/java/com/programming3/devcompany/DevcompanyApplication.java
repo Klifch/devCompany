@@ -14,16 +14,7 @@ import java.util.Locale;
 @SpringBootApplication
 public class DevcompanyApplication {
 
-//	private final LocaleChangeInterceptor localeChangeInterceptor;
-//
-//	public DevcompanyApplication(LocaleChangeInterceptor localeChangeInterceptor) {
-//		this.localeChangeInterceptor = localeChangeInterceptor;
-//	}
-
-//	@Override
-//	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-//		interceptorRegistry.addInterceptor(localeChangeInterceptor);
-//	}
+	// i forgot to add readme
 
 	public static void main(String[] args) {
 
