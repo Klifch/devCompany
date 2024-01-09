@@ -4,11 +4,13 @@ import com.programming3.devcompany.domain.Developer;
 import com.programming3.devcompany.domain.Position;
 import com.programming3.devcompany.domain.Project;
 import com.programming3.devcompany.presentation.viewmodel.ProjectViewModel;
+import com.programming3.devcompany.presentation.viewmodel.SortViewModel;
 import com.programming3.devcompany.service.ProjectService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,9 @@ public class ProjectController {
 
     private Logger logger = LoggerFactory.getLogger(ProjectController.class);
     private final ProjectService projectService;
+
+    @Value("${valuesOptions}")
+    private List<String> valueOptions;
 
     @Autowired
     public ProjectController(ProjectService projectService) {
@@ -92,6 +97,47 @@ public class ProjectController {
         // return view
         logger.info("Presenting view 'projects/projects-form.html'");
         return "projects/projects-form";
+    }
+
+    @GetMapping("/showSortBudgetForm")
+    public String showSortBudgetForm(Model model) {
+        logger.info("Received request /projects/showSortBudgetForm");
+
+        logger.info("Adding SortViewModel to the Model");
+        model.addAttribute("sortViewModel", new SortViewModel());
+
+        logger.info("Adding options to the Model");
+        model.addAttribute("valueOptions", valueOptions);
+
+        return "projects/projects-sort-budget";
+    }
+
+    @PostMapping("/compileSort")
+    public String compileSort(
+            Model model,
+            @Valid @ModelAttribute("sortViewModel") SortViewModel sortVM,
+            BindingResult bindingResult
+    ) {
+        logger.info("Checking for errors ...");
+        if (bindingResult.hasErrors()) {
+            logger.warn("Error found! Routing to form ...");
+            logger.warn("Binding result: " + bindingResult.toString());
+            model.addAttribute("valueOptions", valueOptions);
+            return "projects/projects-sort-budget";
+        }
+
+        logger.info("Received post request /projects/compileSort with SortViewModel {}", sortVM);
+        List<Project> projects;
+        if (sortVM.getOption().equals("Higher")) {
+            projects = projectService.findAllByBudgetHigher(sortVM.getAmount());
+        } else if (sortVM.getOption().equals("Lower")) {
+            projects = projectService.findAllByBudgetLower(sortVM.getAmount());
+        } else {
+            return "redirect:/projects/show";
+        }
+
+        model.addAttribute("projects", projects);
+        return "projects/show-projects";
     }
 
     @PostMapping("/save")

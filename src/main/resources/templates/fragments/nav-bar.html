@@ -29,6 +29,13 @@
                         <a class="nav-link" th:href="@{/projects/show}" th:text="#{nav-projects}" />
                     </li>
                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:text="#{nav-sort}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:text="#{nav-sort-developers-salary}" th:href="@{/developers/showSortSalaryForm}" /></li>
+                            <li><a class="dropdown-item" th:text="#{nav-sort-projects-budget}" th:href="@{/projects/showSortBudgetForm}" /></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" th:text="#{nav-manage}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" th:text="#{nav-manage-developers}" th:href="@{/developers/showFormForAdd}" /></li>

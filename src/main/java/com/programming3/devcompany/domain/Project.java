@@ -1,21 +1,51 @@
 package com.programming3.devcompany.domain;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Entity
+@Table(name = "project")
 public class Project {
 
     private static final AtomicInteger uniq_counter = new AtomicInteger();
 
     // Basic
+    @Column(name = "name", nullable = false)
     private String projectName;
+
+
+    @Column(name = "budget", nullable = false)
     private Double projectBudget;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private final Integer projectId;
 
     // Connections
+    @Transient
     private Developer headOfProject;
+
+
+//    @Transient
+    @ManyToOne
+    @JoinTable(
+        name = "office_project",
+        joinColumns = @JoinColumn(name = "project_id"),
+        inverseJoinColumns = @JoinColumn(name = "office_id")
+    )
     private Office projectOffice;
+
+    @ManyToMany
+    @JoinTable(
+            name="developer_project",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "developer_id")
+    )
     private List<Developer> developers;
 
 

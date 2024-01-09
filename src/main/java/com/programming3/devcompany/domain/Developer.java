@@ -1,7 +1,9 @@
 package com.programming3.devcompany.domain;
 
+import jakarta.persistence.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -9,24 +11,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
+@Entity
+@Table(name = "developer")
 public class Developer {
 
-    private Logger logger = LoggerFactory.getLogger(Developer.class);
+//    private final Logger logger = LoggerFactory.getLogger(Developer.class);
     private static final AtomicInteger uniq_counter = new AtomicInteger();
 
     // Basic
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "age", nullable = false)
     private Integer age;
+
+    @Column(name = "salary", nullable = false)
     private Double salary;
+
+    @Column(name = "hire_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endOfContract;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private final Integer id;
 
 
     // Connections
-    private List<Project> projects;
+    @ManyToMany
+    @JoinTable(
+            name="developer_project",
+            joinColumns = @JoinColumn(name = "developer_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private List<Project> projects = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "position")
     private Position position;
+
+
 
     public Developer() {
         id = uniq_counter.incrementAndGet();
@@ -125,8 +153,8 @@ public class Developer {
         return endOfContract;
     }
 
-    public void setEndOfContract(String endOfContract) {
-        checkDate(endOfContract);
+    public void setEndOfContract(LocalDate endOfContract) {
+        this.endOfContract = endOfContract;
     }
 
     public Position getPosition() {
@@ -144,21 +172,21 @@ public class Developer {
 
     // TODO: old conversion stuff - clean later
     private void checkDate(String localDate) {
-        logger.info("Starting {} to LocalDate conversion ...", localDate);
+//        logger.info("Starting {} to LocalDate conversion ...", localDate);
         try {
             LocalDate date = LocalDate.parse(localDate);
-            logger.info("Conversion to LocalDate successful ...");
+//            logger.info("Conversion to LocalDate successful ...");
 
             if (date.isAfter(LocalDate.now())) {
                 this.endOfContract = date;
             } else {
                 // logg error
-                logger.warn("Invalid date received as an input!");
+//                logger.warn("Invalid date received as an input!");
             }
 
         } catch (DateTimeParseException e) {
             // logg error
-            logger.error("Couldn't parse String to LocalDate", e);
+//            logger.error("Couldn't parse String to LocalDate", e);
         }
     }
 

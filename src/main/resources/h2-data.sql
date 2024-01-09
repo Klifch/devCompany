@@ -7,17 +7,17 @@ INSERT INTO Developer (first_name, last_name, age, salary, hire_date, position) 
                                                                                     ('Anna', 'Smith', 22, 2700, '2023-10-12', 'LEAD'),
                                                                                     ('Leo', 'Potters', 19, 2500, '2024-07-10', 'JUNIOR');
 
--- Projects
+-- Project
 INSERT INTO Project (name, budget) VALUES
                                        ('Spring2', 100500),
                                        ('javaCrab', 100000),
                                        ('java40', 13330),
                                        ('python4', 1000);
 
--- Offices
-INSERT INTO Office (name, address, capacity) VALUES
-                                                 ('BrOffice', 'Long ave. 14', 13),
-                                                 ('Groen', 'Nationalestraat 5', 55);
+-- Office
+INSERT INTO Office (name, address) VALUES
+                                                 ('BrOffice', 'Long ave. 14'),
+                                                 ('Groen', 'Nationalestraat 5');
 
 -- Developer_Project relationships
 INSERT INTO Developer_Project (developer_id, project_id) VALUES

@@ -3,11 +3,13 @@ package com.programming3.devcompany.controller;
 import com.programming3.devcompany.domain.Developer;
 import com.programming3.devcompany.domain.Position;
 import com.programming3.devcompany.presentation.viewmodel.DeveloperViewModel;
+import com.programming3.devcompany.presentation.viewmodel.SortViewModel;
 import com.programming3.devcompany.service.DeveloperService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +26,8 @@ public class DeveloperController {
     private Logger logger = LoggerFactory.getLogger(DeveloperController.class);
     private final DeveloperService developerService;
 
-//    @Value("${positions}")
-//    private List<String> positions;
+    @Value("${valuesOptions}")
+    private List<String> valueOptions;
 
     @Autowired
     public DeveloperController(DeveloperService developerService) {
@@ -47,7 +49,7 @@ public class DeveloperController {
     // mapping for "/show" to show all developers
     @GetMapping("/show")
     public String showDevelopers(Model model) {
-        logger.info("Received request /employees/show");
+        logger.info("Received request /developers/show");
 
         // get all developers from DB
         logger.info("Calling developer Service to get All developers ... ");
@@ -83,7 +85,7 @@ public class DeveloperController {
     // show form for adding new developer
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model) {
-        logger.info("Received request /employees/showFormForAdd");
+        logger.info("Received request /developers/showFormForAdd");
 
         // Create new employee
         // I can change this code for other constructor, but why?
@@ -102,6 +104,47 @@ public class DeveloperController {
         // return view
         logger.info("Presenting view 'developers/developers-form.html'");
         return "developers/developers-form";
+    }
+
+    @GetMapping("/showSortSalaryForm")
+    public String showSortSalaryForm(Model model) {
+        logger.info("Received request /developers/showFormForAdd");
+
+        logger.info("Adding SortViewModel to the Model");
+        model.addAttribute("sortViewModel", new SortViewModel());
+
+        logger.info("Adding options to the Model");
+        model.addAttribute("valueOptions", valueOptions);
+
+        return "developers/developers-sort-salary";
+    }
+
+    @PostMapping("/compileSort")
+    public String compileSort(
+            Model model,
+            @Valid @ModelAttribute("sortViewModel") SortViewModel sortVM,
+            BindingResult bindingResult
+    ) {
+        logger.info("Checking for errors ...");
+        if (bindingResult.hasErrors()) {
+            logger.warn("Error found! Routing to form ...");
+            logger.warn("Binding result: " + bindingResult.toString());
+            model.addAttribute("valueOptions", valueOptions);
+            return "developers/developers-sort-salary";
+        }
+
+        logger.info("Received post request /developers/compileSort with SortViewModel {}", sortVM);
+        List<Developer> developers;
+        if (sortVM.getOption().equals("Higher")) {
+            developers = developerService.findByWithSalaryHigher(sortVM.getAmount());
+        } else if (sortVM.getOption().equals("Lower")) {
+            developers = developerService.findByWithSalaryLower(sortVM.getAmount());
+        } else {
+            return "redirect:/developers/show";
+        }
+
+        model.addAttribute("developers", developers);
+        return "developers/show-developers";
     }
 
     @PostMapping("/save")

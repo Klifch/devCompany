@@ -1,3 +1,17 @@
+-- Drop foreign key constraints first
+SET REFERENTIAL_INTEGRITY FALSE;
+
+-- Drop tables
+DROP TABLE IF EXISTS Developer_Project;
+DROP TABLE IF EXISTS Office_Project;
+DROP TABLE IF EXISTS Developer;
+DROP TABLE IF EXISTS Project;
+DROP TABLE IF EXISTS Office;
+
+-- Enable foreign key constraints again
+SET REFERENTIAL_INTEGRITY TRUE;
+
+
 CREATE TABLE Developer (
                            id INT PRIMARY KEY AUTO_INCREMENT,
                            first_name VARCHAR(255) NOT NULL,
@@ -17,8 +31,7 @@ CREATE TABLE Project (
 CREATE TABLE Office (
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         name VARCHAR(255) NOT NULL,
-                        address VARCHAR(255),
-                        capacity INT
+                        address VARCHAR(255)
 );
 
 CREATE TABLE Developer_Project (
@@ -36,3 +49,4 @@ CREATE TABLE Office_Project (
                                 FOREIGN KEY (project_id) REFERENCES Project(id),
                                 PRIMARY KEY (office_id, project_id)
 );
+

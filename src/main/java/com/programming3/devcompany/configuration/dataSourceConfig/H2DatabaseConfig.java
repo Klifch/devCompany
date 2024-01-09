@@ -1,6 +1,7 @@
 package com.programming3.devcompany.configuration.dataSourceConfig;
 
 import com.programming3.devcompany.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 
 @Configuration
 @Profile("h2")

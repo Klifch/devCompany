@@ -18,4 +18,12 @@ public interface ProjectService {
     List<Project> getProjectsForDeveloper(Developer developer);
 
     void deleteById(Integer id);
+
+    default List<Project> findAllByBudgetLower(Double budget) {
+        return null;
+    }
+
+    default List<Project> findAllByBudgetHigher(Double budget) {
+        return null;
+    }
 }

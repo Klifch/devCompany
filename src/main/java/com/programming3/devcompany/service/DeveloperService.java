@@ -27,4 +27,20 @@ public interface DeveloperService {
     List<Developer> getAllForProject(Project project);
 
     void deleteById(Integer id);
+
+    default List<Developer> findByPosition(Position position) {
+        return null;
+    }
+
+    default List<Developer> findWithSalaryInRange(Double after, Double before) {
+        return null;
+    }
+
+    default List<Developer> findByWithSalaryLower(Double salary) {
+        return null;
+    }
+
+    default List<Developer> findByWithSalaryHigher(Double salary) {
+        return null;
+    }
 }
