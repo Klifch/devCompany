@@ -13,29 +13,39 @@
 
 <div class="container-fluid">
 
-    <h3 th:text="#{details-project-title-details}" />
-    <div class="container grid gap-0 row-gap-1">
-        <p class="h4 mb-4" th:text="#{details-project-title-info}" />
-        <div class="p-2">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="${project.projectName}" />
-                <li class="list-group-item" th:text="${project.projectBudget} + '$'" />
-                <li class="list-group-item" th:text="'ID - ' + ${project.projectId}" />
-                <li class="list-group-item" th:text="#{details-project-info-office} + ' - ' + ${project.projectOffice?.name}" />
-                <li class="list-group-item" th:text="#{details-project-info-location} + ' - ' + ${project.projectOffice?.location}" />
-            </ul>
-        </div>
+    <div class="pt-3 pb-2 text-center">
+        <h3 th:text="#{details-project-title-details}"/>
+    </div>
 
-        <div class="p-2">
-            <p class="h4 mb-4" th:text="#{details-project-title-developers}" />
-            <div class="list-group">
-                <a th:each="developer : ${project.developers}" th:href="@{/developers/showDetails(developerId=${developer.id})}" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" th:text="${developer.firstName} + ' ' + ${developer.lastName}"/>
-                    </div>
-                    <p class="mb-1" th:text="#{details-project-info-position} + ' - ' + ${developer.position}" />
-                    <small class="text-body-secondary" th:text="#{details-project-info-developerId} + ' ' + ${developer.id}" />
-                </a>
+    <div class="container col-md-4 pt-3">
+        <div class="container grid gap-0 row-gap-1">
+            <p class="h4 mb-4" th:text="#{details-project-title-info}"/>
+            <div class="p-2">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:text="${project.projectName}"/>
+                    <li class="list-group-item" th:text="${project.projectBudget} + '$'"/>
+                    <li class="list-group-item" th:text="'ID - ' + ${project.projectId}"/>
+                    <li class="list-group-item"
+                        th:text="#{details-project-info-office} + ' - ' + ${project.projectOffice?.name}"/>
+                    <li class="list-group-item"
+                        th:text="#{details-project-info-location} + ' - ' + ${project.projectOffice?.location}"/>
+                </ul>
+            </div>
+
+            <div class="p-2">
+                <p class="h4 mb-4" th:text="#{details-project-title-developers}"/>
+                <div class="list-group">
+                    <a th:each="developer : ${project.developers}"
+                       th:href="@{/developers/showDetails(developerId=${developer.id})}"
+                       class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1" th:text="${developer.firstName} + ' ' + ${developer.lastName}"/>
+                        </div>
+                        <p class="mb-1" th:text="#{details-project-info-position} + ' - ' + ${developer.position}"/>
+                        <small class="text-body-secondary"
+                               th:text="#{details-project-info-developerId} + ' ' + ${developer.id}"/>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

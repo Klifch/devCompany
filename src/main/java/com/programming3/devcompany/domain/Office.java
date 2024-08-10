@@ -22,15 +22,6 @@ public class Office {
     @Column(name = "id")
     private Integer officeId;
 
-    // Connections
-//    @ManyToMany
-//    @JoinTable(
-//            name = "office_project",
-//            joinColumns = @JoinColumn(name = "office_id"),
-//            inverseJoinColumns = @JoinColumn(name = "project_id")
-//    )
-//    private List<Project> projects;
-
     @OneToMany
     @JoinTable(
             name = "office_project",

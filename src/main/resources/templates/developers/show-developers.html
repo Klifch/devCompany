@@ -27,7 +27,7 @@
         <th th:text="#{show-developers-table-endOfContract}" />
         <th th:text="#{show-developers-table-position}" />
         <th th:text="#{show-developers-table-id}" />
-        <th th:text="#{show-developers-table-action}" />
+        <th class="text-center" th:text="#{show-developers-table-action}" />
     </tr>
     </thead>
 
@@ -41,7 +41,7 @@
         <td th:text="${tempDeveloper.position}" />
         <td th:text="${tempDeveloper.id}" />
 
-        <td>
+        <td class="text-center">
             <a th:href="@{/developers/showDetails(developerId=${tempDeveloper.id})}"
                class="btn btn-dark btn-sm" th:text="#{show-developers-table-button-details}" />
             <a th:href="@{/developers/delete(developerId=${tempDeveloper.id})}"

@@ -23,7 +23,7 @@
         <th th:text="#{show-projects-table-name}" />
         <th th:text="#{show-projects-table-budget}" />
         <th th:text="#{show-projects-table-id}" />
-        <th th:text="#{show-projects-table-action}" />
+        <th class="text-center" th:text="#{show-projects-table-action}" />
     </tr>
     </thead>
 
@@ -33,7 +33,7 @@
         <td th:text="${tempProject.projectBudget} + ' $'" />
         <td th:text="${tempProject.projectId}" />
 
-        <td>
+        <td class="text-center">
             <a th:href="@{/projects/showDetails(projectId=${tempProject.projectId})}"
                class="btn btn-dark btn-sm" th:text="#{show-projects-table-button-details}" />
             <a th:href="@{/projects/delete(projectId=${tempProject.projectId})}"

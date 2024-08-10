@@ -22,9 +22,9 @@ public class JpaRepDatabaseConfig {
 
         return DataSourceBuilder
                 .create()
-                .url("jdbc:postgresql://localhost:5432/devcompany")
-                .username("postgres")
-                .password("1789")
+                .url("jdbc:postgresql://localhost:5434/devcompany")
+                .username("admin")
+                .password("spring")
                 .build();
     }
 }

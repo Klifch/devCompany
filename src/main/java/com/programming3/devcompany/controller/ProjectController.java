@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -126,15 +127,20 @@ public class ProjectController {
             return "projects/projects-sort-budget";
         }
 
-        logger.info("Received post request /projects/compileSort with SortViewModel {}", sortVM);
+        logger.info("Received post request /projects/compileSort with SortViewModel params: {} {}", sortVM.getAmount(), sortVM.getOption());
+
         List<Project> projects;
         if (sortVM.getOption().equals("Higher")) {
-            projects = projectService.findAllByBudgetHigher(sortVM.getAmount());
+            logger.info("Getting projects with budget Higher than {}", sortVM.getAmount());
+            projects = new ArrayList<>(projectService.findAllByBudgetHigher(sortVM.getAmount()));
         } else if (sortVM.getOption().equals("Lower")) {
-            projects = projectService.findAllByBudgetLower(sortVM.getAmount());
+            logger.info("Getting projects with budget Lower than {}", sortVM.getAmount());
+            projects = new ArrayList<>(projectService.findAllByBudgetLower(sortVM.getAmount()));
         } else {
             return "redirect:/projects/show";
         }
+
+        logger.info("Found {} projects", projects.size());
 
         model.addAttribute("projects", projects);
         return "projects/show-projects";
