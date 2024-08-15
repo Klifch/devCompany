@@ -79,4 +79,9 @@ public class JpaDeveloperServiceImpl implements DeveloperService {
     public List<Developer> findByWithSalaryHigher(Double salary) {
         return jpaRepDeveloperRepository.findAllBySalaryAfter(salary);
     }
+
+    @Override
+    public List<Developer> findWithNameOrSurname(String nameOrSurname) {
+        return jpaRepDeveloperRepository.findByFirstNameOrLastNameStartingWith(nameOrSurname);
+    }
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}"/>
+    <title>Search Developer Name</title>
+</head>
+<body>
+
+<div th:insert="~{fragments/nav-bar :: navigation}"></div>
+
+<div class="container-fluid">
+
+    <div class="pt-3 pb-2 text-center">
+        <h3 th:text="#{nav-search-developers-name}"/>
+        <hr>
+    </div>
+
+    <div class="container col-md-4 pt-3">
+        <form action="#" th:action="@{/developers/searchByName}"
+              th:object="${searchNameVM}"
+              method="POST"
+              novalidate="novalidate">
+
+            <div class="input-group mb-3 has-validation">
+                <span class="input-group-text" th:text="#{search-developers-enter-name}"/>
+                <input type="text" th:field="*{nameOrSurname}" class="form-control"
+                       th:classappend="${#fields.hasErrors('nameOrSurname')?'is-invalid':''}" placeholder="Quentin">
+                <div th:if="${#fields.hasErrors('nameOrSurname')}" class="invalid-feedback">
+                    <span th:errors="*{nameOrSurname}"></span>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <button class="btn btn-dark col-4" type="submit" th:text="#{search-developers-search-button}"/>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/webjars/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

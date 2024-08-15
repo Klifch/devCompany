@@ -3,6 +3,7 @@ package com.programming3.devcompany.controller;
 import com.programming3.devcompany.domain.Developer;
 import com.programming3.devcompany.domain.Position;
 import com.programming3.devcompany.presentation.viewmodel.DeveloperViewModel;
+import com.programming3.devcompany.presentation.viewmodel.SearchViewModel;
 import com.programming3.devcompany.presentation.viewmodel.SortViewModel;
 import com.programming3.devcompany.service.DeveloperService;
 import jakarta.validation.Valid;
@@ -146,6 +147,38 @@ public class DeveloperController {
         model.addAttribute("developers", developers);
         return "developers/show-developers";
     }
+
+
+    @GetMapping("/showSearchNameForm")
+    public String showFindByNameForm(Model model) {
+        logger.info("Received request /developers/findByNameForm");
+
+        logger.info("Adding searchNameViewModel to the Model");
+        model.addAttribute("searchNameVM", new SearchViewModel());
+
+        return "developers/developers-search-name";
+    }
+
+    @PostMapping("/searchByName")
+    public String compileSort(
+            Model model,
+            @Valid @ModelAttribute("searchNameVM") SearchViewModel searchVM,
+            BindingResult bindingResult
+    ) {
+        logger.info("Checking for errors ...");
+        if (bindingResult.hasErrors()) {
+            logger.warn("Error found! Routing to form ...");
+            logger.warn("Binding result: " + bindingResult.toString());
+            return "developers/developers-search-name";
+        }
+
+        logger.info("Received post request /developers/searchByName with SearchViewModel {}", searchVM);
+        List<Developer> developers = developerService.findWithNameOrSurname(searchVM.getNameOrSurname());
+
+        model.addAttribute("developers", developers);
+        return "developers/show-developers";
+    }
+
 
     @PostMapping("/save")
     public String saveDeveloper(

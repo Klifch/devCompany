@@ -43,4 +43,8 @@ public interface DeveloperService {
     default List<Developer> findByWithSalaryHigher(Double salary) {
         return null;
     }
+
+    default List<Developer> findWithNameOrSurname(String nameOrSurname) {
+        return null;
+    }
 }

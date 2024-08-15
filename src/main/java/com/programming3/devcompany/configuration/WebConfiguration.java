@@ -26,14 +26,14 @@ public class WebConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public PageTrackingInterceptor yourCustomInterceptor() {
+    public PageTrackingInterceptor myCustomInterceptor() {
         return new PageTrackingInterceptor();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor);
-        registry.addInterceptor(yourCustomInterceptor());
+        registry.addInterceptor(myCustomInterceptor());
     }
 
     // formatter for conversion String -> LocalDate

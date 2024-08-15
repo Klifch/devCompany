@@ -5,10 +5,12 @@ import com.programming3.devcompany.domain.Project;
 import com.programming3.devcompany.service.DeveloperService;
 import com.programming3.devcompany.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Profile("list")
 @Component
 public class ConsolePresenter {
 
