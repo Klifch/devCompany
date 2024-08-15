@@ -2,6 +2,7 @@ package com.programming3.devcompany.controller;
 
 import com.programming3.devcompany.domain.Developer;
 import com.programming3.devcompany.domain.Position;
+import com.programming3.devcompany.exception.DeveloperNotFoundException;
 import com.programming3.devcompany.presentation.viewmodel.DeveloperViewModel;
 import com.programming3.devcompany.presentation.viewmodel.SearchViewModel;
 import com.programming3.devcompany.presentation.viewmodel.SortViewModel;
@@ -221,4 +222,20 @@ public class DeveloperController {
 
         return "redirect:/developers/show";
     }
+
+    @ExceptionHandler(DeveloperNotFoundException.class)
+    public String handleDeveloperNotFoundException(
+            DeveloperNotFoundException e,
+            Model model
+    ) {
+        logger.error("An Error occurred: {}", e.getMessage());
+
+        model.addAttribute("message", e.getMessage());
+
+        return "custom-errors/general-error";
+    }
+
+
+
+
 }

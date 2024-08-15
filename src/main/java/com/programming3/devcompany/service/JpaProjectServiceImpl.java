@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -58,5 +59,10 @@ public class JpaProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> findAllByBudgetHigher(Double budget) {
         return jpaRepProjectRepository.findAllByProjectBudgetAfter(budget);
+    }
+
+    @Override
+    public void triggerSQLException() throws SQLException {
+        throw new SQLException("YO, stop it please!");
     }
 }

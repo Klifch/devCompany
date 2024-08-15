@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,6 +178,14 @@ public class ProjectController {
     public String delete(@RequestParam("projectId") Integer id) {
 
         projectService.deleteById(id);
+
+        return "redirect:/projects/show";
+    }
+
+    @GetMapping("/trigger-sql-exception")
+    public String triggerSqlException() throws SQLException {
+
+        projectService.triggerSQLException();
 
         return "redirect:/projects/show";
     }

@@ -11,11 +11,19 @@
 
 <div th:insert="~{fragments/nav-bar :: navigation}"></div>
 
+<div class="container-fluid">
 
-<h1>Database Error</h1>
-<p>There was a problem accessing the database. Please try again later.</p>
+  <div class="pt-3 pb-2 text-center">
+    <h3>Database Error, I guess someone killed it</h3>
+    <p>on purpose</p>
+      <p class="pt-3 font-monospace" th:if="${message != null}" th:text="${message}"></p>
+  </div>
 
+  <div class="container co-4 pt-5 text-center">
+    <img src="https://media1.tenor.com/m/3E7aj6opwKsAAAAd/gato-misil.gif" alt="Error Gif Loading">
+  </div>
 
+</div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 
